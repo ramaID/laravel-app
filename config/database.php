@@ -9,6 +9,13 @@ $username = $url["user"];
 $password = $url["pass"];
 $database = substr($url["path"], 1);
 
+$url = parse_url(getenv("DATABASE_URL"));
+
+$hostRedis = $url["host"];
+$usernameRedis = $url["user"];
+$passwordRedis = $url["pass"];
+$databaseRedis = substr($url["path"], 1);
+
 return [
 
     /*
@@ -137,11 +144,11 @@ return [
 
         'default' => [
             'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD'),
+            'host' => $hostRedis,
+            'username' => $usernameRedis,
+            'password' => $passwordRedis,
             'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_DB', '0'),
+            'database' => $databaseRedis,
         ],
 
         'cache' => [
