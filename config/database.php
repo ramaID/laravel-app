@@ -4,17 +4,17 @@ use Illuminate\Support\Str;
 
 $url = parse_url(getenv("DATABASE_URL"));
 
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
+$host = $url["host"] ?? null;
+$username = $url["user"] ?? null;
+$password = $url["pass"] ?? null;
+$database = substr($url["path"] ?? null, 1);
 
 $url = parse_url(getenv("DATABASE_URL"));
 
-$hostRedis = $url["host"];
-$usernameRedis = $url["user"];
-$passwordRedis = $url["pass"];
-$databaseRedis = substr($url["path"], 1);
+$hostRedis = $url["host"] ?? null;
+$usernameRedis = $url["user"] ?? null;
+$passwordRedis = $url["pass"] ?? null;
+$databaseRedis = substr($url["path"] ?? null, 1);
 
 return [
 
@@ -139,7 +139,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_'),
         ],
 
         'default' => [
