@@ -47,7 +47,7 @@
             "@php artisan key:generate --ansi"
         ],
         "compile": [
-            "touch /app/database/database.sqlite",
+            "/usr/bin/touch /app/database/database.sqlite",
             "@php artisan migrate --force --seed",
             "@php artisan optimize"
         ]
