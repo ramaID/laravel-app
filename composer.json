@@ -49,7 +49,6 @@
         "compile": [
             "composer install --dev",
             "@php artisan migrate:fresh --force --seed",
-            "@php artisan optimize",
             "@php artisan storage:link"
         ]
     },
