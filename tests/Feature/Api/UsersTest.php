@@ -88,4 +88,24 @@ class UsersTest extends TestCase
                     ]);
             });
     }
+
+    public function test_it_returns_an_user_as_a_resource_object_by_name()
+    {
+        $user = User::factory()->create();
+
+        $this->getJson('api/v1/users/by-name/' . $user->name)
+            ->assertSuccessful()
+            ->assertJson([
+                'data' => [
+                    'id' => $user->id,
+                    'type' => 'users',
+                    'attributes' => [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'created_at' => $user->created_at->toJSON(),
+                        'updated_at' => $user->updated_at->toJSON(),
+                    ]
+                ]
+            ]);
+    }
 }
