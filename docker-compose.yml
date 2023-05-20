@@ -1,12 +1,13 @@
 version: '3.7'
 services:
   php:
-    image: ramageek/bcrud:8.2-fpm-nginx-npm
+    image: ramageek/bcrud:8.2-laravel
     container_name: laravel-app_php
     volumes:
       - .:/var/www/html/
     ports:
       - "8000:80"
+      - "8080:8080"
     environment:
       SSL_MODE: "off"
       AUTORUN_ENABLED: false
