@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
+use App\Http\Controllers\Api\UsersController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users', fn () => new UserCollection(User::paginate()));
-Route::get('/user/{name}', fn (string $name) => new UserResource(User::query()->where(['name' => $name])->first()));
+Route::prefix('v1')->group(function () {
+    Route::apiResource('users', UsersController::class);
+});
