@@ -1,4 +1,4 @@
-name: Laravel CQ
+name: Laravel Code Quality
 
 on:
   push:
