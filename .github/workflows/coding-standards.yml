@@ -4,4 +4,4 @@ on: [push]
 
 jobs:
   lint:
-    uses: ramaID/.github/.github/workflows/coding-standards.yml@main
+    uses: beyondCRUD/.github/.github/workflows/coding-standards.yml
