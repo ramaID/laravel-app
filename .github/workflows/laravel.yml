@@ -2,12 +2,25 @@ name: Laravel Code Quality
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   coding-standart:
     uses: beyondCRUD/.github/.github/workflows/coding-standards.yml@main
   tests:
     uses: beyondCRUD/.github/.github/workflows/laravel-tests.yml@main
+  static-analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+      - uses: actions/checkout@v3
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
+      - name: Start Analyzing
+        run: ./vendor/bin/phpstan analyse
