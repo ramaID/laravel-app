@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  lint:
+  coding-standart:
     uses: beyondCRUD/.github/.github/workflows/coding-standards.yml@main
   tests:
     uses: beyondCRUD/.github/.github/workflows/laravel-tests.yml@main
