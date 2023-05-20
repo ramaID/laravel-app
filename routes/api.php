@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', fn () => new UserCollection(User::paginate()));
-Route::get('/user/{id}', fn (string $id) => new UserResource(User::findOrFail($id)));
+Route::get('/user/{name}', fn (string $name) => new UserResource(User::query()->where(['name' => $name])->first()));
