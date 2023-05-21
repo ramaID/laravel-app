@@ -17,7 +17,7 @@ class UsersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->getJson('api/v1/users/' . $user->id)
+        $this->getJson('api/v1/users/'.$user->id)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -95,7 +95,7 @@ class UsersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->getJson('api/v1/users/by-name/' . $user->name)
+        $this->getJson('api/v1/users/by-name/'.$user->name)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
