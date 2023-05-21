@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 final class UsersController extends Controller
 {
@@ -28,16 +30,20 @@ final class UsersController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateUserRequest $request): JsonResponse
     {
         $user = User::create($request->input('data.attributes'));
 
         return (new UserResource($user))
             ->response()
             ->header('Location', route('users.show', compact('user')));
+    }
+
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
+    {
+        $request->update();
+
+        return (new UserResource($user))->response();
     }
 }

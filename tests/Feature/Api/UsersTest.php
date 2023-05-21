@@ -123,26 +123,51 @@ class UsersTest extends TestCase
         $this->postJson('api/v1/users', $attributes)
             ->assertStatus(201)
             ->assertJson(function (AssertableJson $json) {
-                $json->has('data', 3)
-                    ->has('data', function (AssertableJson $json) {
-                        $json->has('id')
-                            ->has('type')
-                            ->has('attributes', 4)
-                            ->has('attributes', function (AssertableJson $json) {
-                                $json->has('name')
-                                    ->has('email')
-                                    ->has('created_at')
-                                    ->has('updated_at');
-                            })
-                            ->whereAllType([
-                                'id' => 'integer',
-                                'type' => 'string',
-                                'attributes' => 'array',
-                            ]);
-                    });
+                $this->assertUserResourceJson($json);
             })
             ->assertHeader('Location', url('api/v1/users/1'));
 
         $this->assertDatabaseHas('users', ['name' => $userName, 'email' => $email]);
+    }
+
+    public function test_it_can_update_an_user_from_a_resource_object()
+    {
+        $user = User::factory()->create();
+        $name = $this->faker->userName();
+        $email = $this->faker->email();
+        $attributes = ['data' => [
+            'id' => $user->id,
+            'type' => 'users',
+            'attributes' => ['name' => $name, 'email' => $email],
+        ]];
+
+        $this->patchJson('api/v1/users/1', $attributes)
+            ->assertSuccessful()
+            ->assertJson(function (AssertableJson $json) {
+                $this->assertUserResourceJson($json);
+            });
+
+        $this->assertDatabaseHas('users', ['id' => $user->id, 'name' => $name, 'email' => $email]);
+    }
+
+    private function assertUserResourceJson(AssertableJson $json): void
+    {
+        $json->has('data', 3)
+            ->has('data', function (AssertableJson $json) {
+                $json->has('id')
+                    ->has('type')
+                    ->has('attributes', 4)
+                    ->has('attributes', function (AssertableJson $json) {
+                        $json->has('name')
+                            ->has('email')
+                            ->has('created_at')
+                            ->has('updated_at');
+                    })
+                    ->whereAllType([
+                        'id' => 'integer',
+                        'type' => 'string',
+                        'attributes' => 'array',
+                    ]);
+            });
     }
 }
