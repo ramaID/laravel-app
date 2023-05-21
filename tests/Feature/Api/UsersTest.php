@@ -4,18 +4,20 @@ namespace Tests\Feature\Api;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class UsersTest extends TestCase
 {
     use LazilyRefreshDatabase;
+    use WithFaker;
 
     public function test_it_returns_an_user_as_a_resource_object()
     {
         $user = User::factory()->create();
 
-        $this->getJson('api/v1/users/'.$user->id)
+        $this->getJson('api/v1/users/' . $user->id)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -93,7 +95,7 @@ class UsersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->getJson('api/v1/users/by-name/'.$user->name)
+        $this->getJson('api/v1/users/by-name/' . $user->name)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -107,5 +109,40 @@ class UsersTest extends TestCase
                     ],
                 ],
             ]);
+    }
+
+    public function test_it_can_create_an_user_from_a_resource_object()
+    {
+        $userName = $this->faker->userName();
+        $email = $this->faker->email();
+        $attributes = ['data' => [
+            'type' => 'users',
+            'attributes' => ['name' => $userName, 'email' => $email, 'password' => 'secret'],
+        ]];
+
+        $this->postJson('api/v1/users', $attributes)
+            ->assertStatus(201)
+            ->assertJson(function (AssertableJson $json) {
+                $json->has('data', 3)
+                    ->has('data', function (AssertableJson $json) {
+                        $json->has('id')
+                            ->has('type')
+                            ->has('attributes', 4)
+                            ->has('attributes', function (AssertableJson $json) {
+                                $json->has('name')
+                                    ->has('email')
+                                    ->has('created_at')
+                                    ->has('updated_at');
+                            })
+                            ->whereAllType([
+                                'id' => 'integer',
+                                'type' => 'string',
+                                'attributes' => 'array',
+                            ]);
+                    });
+            })
+            ->assertHeader('Location', url('api/v1/users/1'));
+
+        $this->assertDatabaseHas('users', ['name' => $userName, 'email' => $email]);
     }
 }
