@@ -33,7 +33,9 @@ final class UsersController extends Controller
      */
     public function store(CreateUserRequest $request): JsonResponse
     {
-        $user = User::create($request->input('data.attributes'));
+        /** @var array<string, mixed> $attributes */
+        $attributes = $request->input('data.attributes');
+        $user = User::create($attributes);
 
         return (new UserResource($user))
             ->response()
