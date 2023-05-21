@@ -14,7 +14,7 @@ class UpdateUserRequest extends CreateUserRequest
     public function rules(): array
     {
         $rules = parent::rules();
-        $rules['data.attributes.email'] = 'sometimes|required|string|email|unique:users,email,' . $this->user->id;
+        $rules['data.attributes.email'] = 'sometimes|required|string|email|unique:users,email,'.$this->user->id;
         $rules['data.attributes.password'] = 'nullable';
 
         return $rules;
