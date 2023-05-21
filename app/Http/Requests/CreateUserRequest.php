@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\ValidationRule;
 
 class CreateUserRequest extends FormRequest
 {
@@ -16,8 +17,10 @@ class CreateUserRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<mixed>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             'data' => 'required|array',

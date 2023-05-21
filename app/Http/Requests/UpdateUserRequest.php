@@ -11,8 +11,11 @@ class UpdateUserRequest extends CreateUserRequest
      */
     public function rules(): array
     {
+        /** @var User */
+        $user = $this->route('user');
+
         $rules = parent::rules();
-        $rules['data.attributes.email'] = 'sometimes|required|string|email|unique:users,email,' . $this->user->id;
+        $rules['data.attributes.email'] = 'sometimes|required|string|email|unique:users,email,' . $user->id;
         $rules['data.attributes.password'] = 'nullable';
 
         return $rules;
@@ -23,6 +26,9 @@ class UpdateUserRequest extends CreateUserRequest
         /** @var User */
         $user = $this->route('user');
 
-        return $user->update($this->input('data.attributes'));
+        /** @var array<string, mixed> $attributes */
+        $attributes = $this->input('data.attributes');
+
+        return (bool) $user->query()->update($attributes);
     }
 }
