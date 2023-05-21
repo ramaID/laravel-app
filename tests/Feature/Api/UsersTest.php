@@ -115,10 +115,7 @@ class UsersTest extends TestCase
     {
         $userName = $this->faker->userName();
         $email = $this->faker->email();
-        $attributes = ['data' => [
-            'type' => 'users',
-            'attributes' => ['name' => $userName, 'email' => $email, 'password' => 'secret'],
-        ]];
+        $attributes = ['name' => $userName, 'email' => $email, 'password' => 'secret'];
 
         $this->postJson('api/v1/users', $attributes)
             ->assertStatus(201)
@@ -135,11 +132,7 @@ class UsersTest extends TestCase
         $user = User::factory()->create();
         $name = $this->faker->userName();
         $email = $this->faker->email();
-        $attributes = ['data' => [
-            'id' => $user->id,
-            'type' => 'users',
-            'attributes' => ['name' => $name, 'email' => $email],
-        ]];
+        $attributes = ['name' => $name, 'email' => $email];
 
         $this->patchJson('api/v1/users/1', $attributes)
             ->assertSuccessful()

@@ -23,12 +23,9 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'data' => 'required|array',
-            'data.type' => 'required|in:users',
-            'data.attributes' => 'required|array',
-            'data.attributes.name' => 'required|string',
-            'data.attributes.email' => 'required|string|email|unique:users,email',
-            'data.attributes.password' => 'required|string|min:5',
+            'name' => 'required|string',
+            'email' => 'required|string|email|unique:users,email',
+            'password' => 'required|string|min:5',
         ];
     }
 }
