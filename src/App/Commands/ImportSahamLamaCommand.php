@@ -2,11 +2,12 @@
 
 namespace App\Commands;
 
-use Domain\Stock\Models\OldStock;
-use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 use Support\Csv;
+use App\Application;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use Illuminate\Console\Command;
+use Domain\Stock\Models\OldStock;
 
 class ImportSahamLamaCommand extends Command
 {
@@ -24,8 +25,9 @@ class ImportSahamLamaCommand extends Command
     {
         $this->info('Starting');
 
-        $importCount = $this->import(resource_path('stocks/tipe-a.csv'), 'A');
-        $importCount += $this->import(resource_path('stocks/tipe-b.csv'), 'B');
+        $importCount = $this->import(resource_path('stocks/sample.csv'), 'B');
+        // $importCount = $this->import(resource_path('stocks/tipe-a.csv'), 'A');
+        // $importCount += $this->import(resource_path('stocks/tipe-b.csv'), 'B');
 
         $this->info('Berhasil di-import: '.$importCount);
         $this->info('Done');
