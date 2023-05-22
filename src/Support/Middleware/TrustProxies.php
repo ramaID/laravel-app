@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Support\Middleware;
 
-use Illuminate\Http\Middleware\TrustProxies as Middleware;
 use Illuminate\Http\Request;
 
-class TrustProxies extends Middleware
+class TrustProxies extends \Illuminate\Http\Middleware\TrustProxies
 {
     /**
      * The trusted proxies for this application.

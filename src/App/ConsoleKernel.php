@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Console;
+namespace App;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends ConsoleKernel
+class ConsoleKernel extends \Illuminate\Foundation\Console\Kernel
 {
     /**
      * Define the application's command schedule.

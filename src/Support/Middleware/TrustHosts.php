@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Support\Middleware;
 
-use Illuminate\Http\Middleware\TrustHosts as Middleware;
-
-class TrustHosts extends Middleware
+class TrustHosts extends \Illuminate\Http\Middleware\TrustHosts
 {
     /**
      * Get the host patterns that should be trusted.

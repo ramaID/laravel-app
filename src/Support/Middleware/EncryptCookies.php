@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Support\Middleware;
 
-use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
-
-class EncryptCookies extends Middleware
+class EncryptCookies extends \Illuminate\Cookie\Middleware\EncryptCookies
 {
     /**
      * The names of the cookies that should not be encrypted.

@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Support\Middleware;
 
-use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
-
-class TrimStrings extends Middleware
+class TrimStrings extends \Illuminate\Foundation\Http\Middleware\TrimStrings
 {
     /**
      * The names of the attributes that should not be trimmed.

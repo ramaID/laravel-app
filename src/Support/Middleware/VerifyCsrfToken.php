@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Support\Middleware;
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
-
-class VerifyCsrfToken extends Middleware
+class VerifyCsrfToken extends \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken
 {
     /**
      * The URIs that should be excluded from CSRF verification.
