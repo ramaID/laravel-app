@@ -17,6 +17,9 @@ enum SeriEnum: string
         };
     }
 
+    /**
+     * @return array<string>
+     */
     public static function keys(): array
     {
         return array_column(static::cases(), 'name');

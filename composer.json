@@ -62,6 +62,9 @@
         ],
         "testc": [
             "XDEBUG_MODE=develop,debug,coverage php artisan test --coverage"
+        ],
+        "analyse-baseline": [
+            "vendor/bin/phpstan --generate-baseline"
         ]
     },
     "extra": {

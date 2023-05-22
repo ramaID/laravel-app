@@ -1,0 +1,26 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Support\\\\Csv\\:\\:open\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Support/Csv.php
+
+		-
+			message: "#^Method Support\\\\Csv\\:\\:open\\(\\) has parameter \\$callback with no type specified\\.$#"
+			count: 1
+			path: src/Support/Csv.php
+
+		-
+			message: "#^Method Support\\\\Csv\\:\\:row\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Support/Csv.php
+
+		-
+			message: "#^Method Support\\\\Csv\\:\\:row\\(\\) has parameter \\$callback with no type specified\\.$#"
+			count: 1
+			path: src/Support/Csv.php
+
+		-
+			message: "#^Parameter \\#1 \\$array of function array_filter expects array, array\\|false given\\.$#"
+			count: 1
+			path: src/Support/Csv.php
