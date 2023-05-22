@@ -58,6 +58,9 @@
             "composer install --dev",
             "@php artisan migrate:fresh --force --seed",
             "@php artisan storage:link"
+        ],
+        "testc": [
+            "XDEBUG_MODE=develop,debug,coverage php artisan test --coverage"
         ]
     },
     "extra": {
