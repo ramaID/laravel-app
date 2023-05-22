@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Console\Scheduling\Schedule;
-
 class ConsoleKernel extends \Illuminate\Foundation\Console\Kernel
 {
     /**
