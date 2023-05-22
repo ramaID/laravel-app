@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Artisan;
 
-use Illuminate\Database\Seeder;
-
-class DatabaseSeeder extends Seeder
+class DatabaseSeeder extends \Illuminate\Database\Seeder
 {
     /**
      * Seed the application's database.
@@ -14,6 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::factory(500)->create();
+        Artisan::call('app:import-saham-lama-command');
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

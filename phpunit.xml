@@ -18,6 +18,7 @@
         </include>
         <exclude>
             <file>src/App/Providers/BroadcastServiceProvider.php</file>
+            <file>src/Domain/Stock/SeriEnum.php</file>
             <file>src/Support/Middleware/Authenticate.php</file>
             <file>src/Support/Middleware/RedirectIfAuthenticated.php</file>
             <file>src/Support/Middleware/TrustHosts.php</file>
