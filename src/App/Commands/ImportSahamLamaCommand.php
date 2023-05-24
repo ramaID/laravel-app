@@ -2,12 +2,11 @@
 
 namespace App\Commands;
 
-use Support\Csv;
-use App\Application;
-use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
-use Illuminate\Console\Command;
 use Domain\Stock\Models\OldStock;
+use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Support\Csv;
 
 class ImportSahamLamaCommand extends Command
 {
