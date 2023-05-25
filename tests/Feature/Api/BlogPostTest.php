@@ -18,7 +18,7 @@ class BlogPostTest extends TestCase
         /** @var BlogPost $blog */
         $blog = BlogPost::factory()->create();
 
-        $this->getJson('api/v1/blog-post/' . $blog->slug)
+        $this->getJson('api/v1/blog-post/'.$blog->slug)
             ->assertSuccessful()
             ->assertJson(function (AssertableJson $json) {
                 $json->has('included')

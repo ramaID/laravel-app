@@ -58,7 +58,7 @@ class BlogPostFactory extends Factory
 
     private function markdown(): string
     {
-        return <<<MD
+        return <<<'MD'
         ## Tamen attonuit
 
         *Lorem* markdownum, Broteasque servat editus cum perenni, ut quae. Virtute equa

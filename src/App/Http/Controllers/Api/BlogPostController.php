@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Domain\Content\Models\BlogPost;
 use Domain\Content\Resources\BlogPostResource;
-use Illuminate\Http\Response;
 use TiMacDonald\JsonApi\JsonApiResource;
 use TiMacDonald\JsonApi\JsonApiResourceCollection;
 

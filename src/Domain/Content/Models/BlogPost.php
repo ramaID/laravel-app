@@ -2,13 +2,13 @@
 
 namespace Domain\Content\Models;
 
-use Illuminate\Support\Str;
 use Database\Factories\BlogPostFactory;
-use Illuminate\Database\Eloquent\Model;
 use Domain\Content\Enums\BlogPostStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * @property string $ulid
