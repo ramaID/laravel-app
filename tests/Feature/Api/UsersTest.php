@@ -17,7 +17,7 @@ class UsersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->getJson('api/v1/users/'.$user->id)
+        $this->getJson('api/v1/users/' . $user->id)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -95,7 +95,7 @@ class UsersTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->getJson('api/v1/users/by-name/'.$user->name)
+        $this->getJson('api/v1/users/by-name/' . $user->name)
             ->assertSuccessful()
             ->assertJson([
                 'data' => [
@@ -141,6 +141,18 @@ class UsersTest extends TestCase
             });
 
         $this->assertDatabaseHas('users', ['id' => $user->id, 'name' => $name, 'email' => $email]);
+    }
+
+    public function test_it_can_delete_an_user_through_a_delete_request()
+    {
+        $user = User::factory()->create();
+
+        $this->delete('api/v1/users/1', [], [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+        ])->assertStatus(204);
+
+        $this->assertDatabaseMissing('users', $user->toArray());
     }
 
     private function assertUserResourceJson(AssertableJson $json): void
