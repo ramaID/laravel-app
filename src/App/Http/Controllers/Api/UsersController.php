@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 final class UsersController extends Controller
 {
@@ -47,7 +49,7 @@ final class UsersController extends Controller
         return (new UserResource($user))->response();
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): Response
     {
         $user->delete();
 
