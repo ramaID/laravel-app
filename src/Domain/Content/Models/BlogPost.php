@@ -7,6 +7,7 @@ use Database\Factories\BlogPostFactory;
 use Illuminate\Database\Eloquent\Model;
 use Domain\Content\Enums\BlogPostStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
@@ -31,7 +32,7 @@ class BlogPost extends Model
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'date' => 'datetime',
@@ -41,10 +42,8 @@ class BlogPost extends Model
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
      */
-    protected static function newFactory()
+    protected static function newFactory(): BlogPostFactory
     {
         return BlogPostFactory::new();
     }
