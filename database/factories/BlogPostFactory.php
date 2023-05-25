@@ -29,7 +29,7 @@ class BlogPostFactory extends Factory
             'title' => $this->faker->words($this->faker->numberBetween(1, 5), true),
             'date' => $this->faker->date(),
             'body' => $body ?? $this->markdown(),
-            'author' => 'Brent',
+            'author' => 'Rama',
             'status' => $this->faker->randomElement([
                 BlogPostStatus::DRAFT()->value,
                 BlogPostStatus::PUBLISHED()->value,
