@@ -9,6 +9,7 @@
         "ext-pcntl": "*",
         "ext-redis": "*",
         "ext-swoole": "*",
+        "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.8",
         "laravel/octane": "^2.0",

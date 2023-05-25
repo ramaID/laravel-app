@@ -20,8 +20,8 @@ class UsersTest extends TestCase
         $this->getJson('api/v1/users/'.$user->id)
             ->assertSuccessful()
             ->assertJson([
-                'data' => [
-                    'id' => $user->id,
+                'data' => [[
+                    'id' => $user->ulid,
                     'type' => 'users',
                     'attributes' => [
                         'name' => $user->name,
@@ -29,7 +29,7 @@ class UsersTest extends TestCase
                         'created_at' => $user->created_at->toJSON(),
                         'updated_at' => $user->updated_at->toJSON(),
                     ],
-                ],
+                ]],
             ]);
     }
 
@@ -46,7 +46,7 @@ class UsersTest extends TestCase
                             ->has('type')
                             ->has('attributes', 4)
                             ->whereAllType([
-                                'id' => 'integer',
+                                'id' => 'string',
                                 'type' => 'string',
                                 'attributes' => 'array',
                             ]);
@@ -91,26 +91,6 @@ class UsersTest extends TestCase
             });
     }
 
-    public function test_it_returns_an_user_as_a_resource_object_by_name()
-    {
-        $user = User::factory()->create();
-
-        $this->getJson('api/v1/users/by-name/'.$user->name)
-            ->assertSuccessful()
-            ->assertJson([
-                'data' => [
-                    'id' => $user->id,
-                    'type' => 'users',
-                    'attributes' => [
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'created_at' => $user->created_at->toJSON(),
-                        'updated_at' => $user->updated_at->toJSON(),
-                    ],
-                ],
-            ]);
-    }
-
     public function test_it_can_create_an_user_from_a_resource_object()
     {
         $userName = $this->faker->userName();
@@ -122,7 +102,7 @@ class UsersTest extends TestCase
             ->assertJson(function (AssertableJson $json) {
                 $this->assertUserResourceJson($json);
             })
-            ->assertHeader('Location', url('api/v1/users/1'));
+            ->assertHeader('Location', url('api/v1/users/'.User::first()->ulid));
 
         $this->assertDatabaseHas('users', ['name' => $userName, 'email' => $email]);
     }
@@ -134,20 +114,20 @@ class UsersTest extends TestCase
         $email = $this->faker->email();
         $attributes = ['name' => $name, 'email' => $email];
 
-        $this->patchJson('api/v1/users/1', $attributes)
+        $this->patchJson('api/v1/users/'.$user->ulid, $attributes)
             ->assertSuccessful()
             ->assertJson(function (AssertableJson $json) {
                 $this->assertUserResourceJson($json);
             });
 
-        $this->assertDatabaseHas('users', ['id' => $user->id, 'name' => $name, 'email' => $email]);
+        $this->assertDatabaseHas('users', ['ulid' => $user->ulid, 'name' => $name, 'email' => $email]);
     }
 
     public function test_it_can_delete_an_user_through_a_delete_request()
     {
         $user = User::factory()->create();
 
-        $this->delete('api/v1/users/1', [], [
+        $this->delete('api/v1/users/'.$user->ulid, [], [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
         ])->assertStatus(204);
@@ -169,7 +149,7 @@ class UsersTest extends TestCase
                             ->has('updated_at');
                     })
                     ->whereAllType([
-                        'id' => 'integer',
+                        'id' => 'string',
                         'type' => 'string',
                         'attributes' => 'array',
                     ]);
