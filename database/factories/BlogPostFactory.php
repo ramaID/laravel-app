@@ -26,7 +26,7 @@ class BlogPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->words($this->faker->numberBetween(1, 5), true),
+            'title' => $this->faker->words($this->faker->numberBetween(3, 6), true),
             'date' => $this->faker->date(),
             'body' => $body ?? $this->markdown(),
             'author' => 'Rama',

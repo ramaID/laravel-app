@@ -12,9 +12,10 @@ class UpdateUserRequest extends CreateUserRequest
     public function rules(): array
     {
         /** @var User */
-        $user = $this->route('user');
+        $user = $this->route('ulid');
+        dd($this->route());
         $rules = parent::rules();
-        $rules['email'] = 'sometimes|required|string|email|unique:users,email,'.$user->id;
+        $rules['email'] = 'sometimes|required|string|email';
         $rules['password'] = 'nullable';
 
         return $rules;

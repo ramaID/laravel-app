@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/healthcheck', function () {
+    return response([
+        'status' => 'up',
+        'services' => [
+            'database' => 'up',
+            'redis' => 'up',
+        ],
+    ])->json();
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

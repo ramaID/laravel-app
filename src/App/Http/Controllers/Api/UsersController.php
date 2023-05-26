@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use Knuckles\Scribe\Attributes\Group;
+use App\Http\Resources\UserCollection;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserResource;
-use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Response;
 
+#[Group("User management", "APIs for managing users")]
 final class UsersController extends Controller
 {
     /**
@@ -41,6 +43,9 @@ final class UsersController extends Controller
             ->header('Location', route('users.show', compact('user')));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(UpdateUserRequest $request, User $user): JsonResponse
     {
         $request->update();
@@ -48,6 +53,9 @@ final class UsersController extends Controller
         return (new UserResource($user))->response();
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(User $user): Response
     {
         $user->delete();
