@@ -4,7 +4,6 @@ namespace Domain\Content\Services;
 
 use Domain\Content\Models\BlogPost;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchBlogPostService
