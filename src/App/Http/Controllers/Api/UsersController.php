@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use Knuckles\Scribe\Attributes\Group;
-use App\Http\Resources\UserCollection;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Knuckles\Scribe\Attributes\Group;
 
-#[Group("User management", "APIs for managing users")]
+#[Group('User management', 'APIs for managing users')]
 final class UsersController extends Controller
 {
     /**
