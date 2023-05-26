@@ -16,14 +16,24 @@ class SearchBlogPostService
 
     private string $search;
 
+    /**
+     * @var Builder<BlogPost>
+     */
     private Builder $query;
 
+    /**
+     * @param array<string, string|int> $parameters
+     */
     public function __construct(array $parameters)
     {
         $this->setLocalParameters($parameters);
         $this->query = BlogPost::query();
     }
 
+    /**
+     *
+     * @return LengthAwarePaginator<BlogPost>
+     */
     public function search(): LengthAwarePaginator
     {
         $this->applySearch();
@@ -32,12 +42,15 @@ class SearchBlogPostService
         return $this->query->paginate($this->take);
     }
 
-    private function setLocalParameters($parameters): void
+    /**
+     * @param array<string, string|int> $parameters
+     */
+    private function setLocalParameters(array $parameters): void
     {
-        $this->take = isset($parameters['take']) ? $parameters['take'] : 15;
-        $this->orderBy = isset($parameters['order_by']) ? $parameters['order_by'] : 'created_at';
-        $this->orderDirection = isset($parameters['order_direction']) ? $parameters['order_direction'] : 'DESC';
-        $this->search = isset($parameters['search']) ? $parameters['search'] : '';
+        $this->take = isset($parameters['take']) ? (int) $parameters['take'] : 15;
+        $this->orderBy = isset($parameters['order_by']) ? (string) $parameters['order_by'] : 'created_at';
+        $this->orderDirection = isset($parameters['order_direction']) ? (string) $parameters['order_direction'] : 'DESC';
+        $this->search = isset($parameters['search']) ? (string) $parameters['search'] : '';
     }
 
     private function applyOrder(): void
