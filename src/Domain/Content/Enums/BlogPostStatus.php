@@ -12,7 +12,7 @@ class BlogPostStatus extends Enum
 {
     public function label(): string
     {
-        return match($this->value) {
+        return match ($this->value) {
             self::DRAFT()->value => 'draft',
             self::PUBLISHED()->value => 'published',
         };
@@ -20,7 +20,7 @@ class BlogPostStatus extends Enum
 
     public function color(): string
     {
-        return match($this->value) {
+        return match ($this->value) {
             self::DRAFT()->value => 'bg-red-500',
             self::PUBLISHED()->value => 'bg-green-500',
         };

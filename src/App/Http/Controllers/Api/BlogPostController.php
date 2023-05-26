@@ -7,7 +7,6 @@ use Domain\Content\Models\BlogPost;
 use Domain\Content\Resources\BlogPostResource;
 use Domain\Content\Services\SearchBlogPostService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use TiMacDonald\JsonApi\JsonApiResource;
 use TiMacDonald\JsonApi\JsonApiResourceCollection;
 
