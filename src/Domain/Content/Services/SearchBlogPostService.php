@@ -22,7 +22,7 @@ class SearchBlogPostService
     private Builder $query;
 
     /**
-     * @param array<string, string|int> $parameters
+     * @param  array<string, string|int>  $parameters
      */
     public function __construct(array $parameters)
     {
@@ -31,7 +31,6 @@ class SearchBlogPostService
     }
 
     /**
-     *
      * @return LengthAwarePaginator<BlogPost>
      */
     public function search(): LengthAwarePaginator
@@ -43,7 +42,7 @@ class SearchBlogPostService
     }
 
     /**
-     * @param array<string, string|int> $parameters
+     * @param  array<string, string|int>  $parameters
      */
     private function setLocalParameters(array $parameters): void
     {
