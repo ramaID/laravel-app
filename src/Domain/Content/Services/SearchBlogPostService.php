@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Builder;
 class SearchBlogPostService
 {
     private int $take;
+
     private string $orderBy;
+
     private string $orderDirection;
+
     private string $search;
+
     private Builder $query;
 
     public function __construct($parameters)
@@ -32,12 +36,12 @@ class SearchBlogPostService
         $this->take = isset($parameters['take']) ? $parameters['take'] : 15;
         $this->orderBy = isset($parameters['order_by']) ? $parameters['order_by'] : 'created_at';
         $this->orderDirection = isset($parameters['order_direction']) ? $parameters['order_direction'] : 'DESC';
-        $this->search = isset( $parameters['search'] ) ? $parameters['search'] : '';
+        $this->search = isset($parameters['search']) ? $parameters['search'] : '';
     }
 
     private function applyOrder()
     {
-        if (!$this->orderBy) {
+        if (! $this->orderBy) {
             $this->query->orderBy($this->orderBy, $this->orderDirection);
         } else {
             $this->query->latest();
