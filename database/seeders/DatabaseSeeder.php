@@ -12,12 +12,14 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(500)->create();
-        Artisan::call('app:import-saham-lama-command');
-
+        // Artisan::call('app:import-saham-lama-command');
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([
+            UserSeeder::class,
+            EventSeeder::class,
+        ]);
     }
 }
