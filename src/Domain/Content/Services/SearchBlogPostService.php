@@ -4,6 +4,8 @@ namespace Domain\Content\Services;
 
 use Domain\Content\Models\BlogPost;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchBlogPostService
 {
@@ -17,13 +19,13 @@ class SearchBlogPostService
 
     private Builder $query;
 
-    public function __construct($parameters)
+    public function __construct(array $parameters)
     {
         $this->setLocalParameters($parameters);
         $this->query = BlogPost::query();
     }
 
-    public function search()
+    public function search(): LengthAwarePaginator
     {
         $this->applySearch();
         $this->applyOrder();
@@ -31,7 +33,7 @@ class SearchBlogPostService
         return $this->query->paginate($this->take);
     }
 
-    private function setLocalParameters($parameters)
+    private function setLocalParameters($parameters): void
     {
         $this->take = isset($parameters['take']) ? $parameters['take'] : 15;
         $this->orderBy = isset($parameters['order_by']) ? $parameters['order_by'] : 'created_at';
@@ -39,7 +41,7 @@ class SearchBlogPostService
         $this->search = isset($parameters['search']) ? $parameters['search'] : '';
     }
 
-    private function applyOrder()
+    private function applyOrder(): void
     {
         if (! $this->orderBy) {
             $this->query->orderBy($this->orderBy, $this->orderDirection);
@@ -48,7 +50,7 @@ class SearchBlogPostService
         }
     }
 
-    private function applySearch()
+    private function applySearch(): void
     {
         if ($this->search !== '') {
             $search = urldecode($this->search);
