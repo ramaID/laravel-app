@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Event;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class EventSeeder extends Seeder
@@ -14,7 +13,7 @@ class EventSeeder extends Seeder
     public function run(): void
     {
         $data = [];
-        for ($i=0; $i < 100_000; $i++) {
+        for ($i = 0; $i < 100_000; $i++) {
             $event = Event::factory()->make();
             $data[] = $event->toArray();
         }

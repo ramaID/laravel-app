@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         $data = [];
         $passwordEnc = Hash::make(fake()->password());
-        for ($i=0; $i < 1_000; $i++) {
+        for ($i = 0; $i < 1_000; $i++) {
             $factory = User::factory()->make();
             $data[] = $factory->toArray() + ['password' => $passwordEnc];
         }
