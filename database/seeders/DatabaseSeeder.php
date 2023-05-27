@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Domain\Content\Models\BlogPost;
 use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends \Illuminate\Database\Seeder
@@ -18,8 +20,9 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call([
-            UserSeeder::class,
-            EventSeeder::class,
+            CategorySeeder::class,
+            // EventSeeder::class,
         ]);
+        BlogPost::factory()->count(500)->create();
     }
 }

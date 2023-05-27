@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->ulid()->unique();
 
+            $table->foreignId('category_id')->references('id')->on('categories');
             $table->string('title');
             $table->string('slug');
             $table->string('author');

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Domain\Content\Enums\BlogPostStatus;
 use Domain\Content\Models\BlogPost;
+use Domain\Content\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,7 +26,20 @@ class BlogPostFactory extends Factory
      */
     public function definition(): array
     {
+        $categories = Category::query()->pluck('id')->toArray();
+
+        if (!count($categories)) {
+            $categoryID = Category::factory()->create()->id;
+        } else {
+            $categoryID = array_rand($categories);
+        }
+
+        if ($categoryID === 0) {
+            $categoryID = Category::first()->id;
+        }
+
         return [
+            'category_id' => $categoryID,
             'title' => $this->faker->words($this->faker->numberBetween(3, 6), true),
             'date' => $this->faker->date(),
             'body' => $body ?? $this->markdown(),
