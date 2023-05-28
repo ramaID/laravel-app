@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index()
     {
         return CategoryResource::collection(
-            Category::query()->withCount('blogPosts')->paginate()
+            Category::query()->withCount('blogPosts')->latest()->paginate(5)
         );
     }
 

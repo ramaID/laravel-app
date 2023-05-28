@@ -14,6 +14,13 @@ class Category extends Model
     use HasFactory, HasUlids;
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array<string>|bool
+     */
+    protected $guarded = [];
+
+    /**
      * The primary key for the model.
      *
      * @var string
@@ -31,9 +38,7 @@ class Category extends Model
         });
 
         self::updating(function (Category $cat) {
-            if (! $cat->slug) {
-                $cat->slug = Str::slug($cat->name);
-            }
+            $cat->slug = Str::slug($cat->name);
         });
     }
 

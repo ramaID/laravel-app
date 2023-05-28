@@ -13,10 +13,10 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $data = [];
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 50; $i++) {
             $data[] = Category::factory()->make()->toArray();
         }
-        foreach (array_chunk($data, 5) as $chunk) {
+        foreach (array_chunk($data, 25) as $chunk) {
             Category::query()->insert($chunk);
         }
     }

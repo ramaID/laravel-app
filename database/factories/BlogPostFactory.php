@@ -26,6 +26,7 @@ class BlogPostFactory extends Factory
      */
     public function definition(): array
     {
+        // REVIEW: masih bisa di optimasi dengan menerapkan cache
         $categories = Category::query()->pluck('id')->toArray();
 
         if (!count($categories)) {
