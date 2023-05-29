@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use Domain\Content\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCategoryRequest;
+use Domain\Content\Models\Category;
 use Domain\Content\Resources\CategoryResource;
 
 /**

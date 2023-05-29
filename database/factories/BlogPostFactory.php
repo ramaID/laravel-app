@@ -29,7 +29,7 @@ class BlogPostFactory extends Factory
         // REVIEW: masih bisa di optimasi dengan menerapkan cache
         $categories = Category::query()->pluck('id')->toArray();
 
-        if (!count($categories)) {
+        if (! count($categories)) {
             $categoryID = Category::factory()->create()->id;
         } else {
             $categoryID = array_rand($categories);
