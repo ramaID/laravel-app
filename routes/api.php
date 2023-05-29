@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\BlogPostController;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\UsersController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V2\CategoryBlueprintController;
+use App\Http\Controllers\Api\V2\CategoryController as V2CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('category', CategoryController::class);
-    // Route::apiResource('users', UsersController::class);
-    // Route::apiResource('blog-post', BlogPostController::class);
+});
+
+Route::prefix('v2')->group(function () {
+    Route::get('category/blueprint', CategoryBlueprintController::class);
+    Route::apiResource('category', V2CategoryController::class);
 });
