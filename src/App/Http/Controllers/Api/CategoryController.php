@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCategoryRequest;
 use Domain\Content\Models\Category;
 use Domain\Content\Resources\CategoryResource;
+use Domain\Content\Services\SearchCategoryService;
+use Illuminate\Http\Request;
 
 /**
  * @group Category management
@@ -16,11 +18,11 @@ class CategoryController extends Controller
     /**
      * Listing
      */
-    public function index()
+    public function index(Request $request)
     {
-        return CategoryResource::collection(
-            Category::query()->withCount('blogPosts')->latest()->paginate(5)
-        );
+        $service = new SearchCategoryService($request->all());
+
+        return CategoryResource::collection($service->search());
     }
 
     /**
