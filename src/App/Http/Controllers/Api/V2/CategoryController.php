@@ -16,10 +16,10 @@ use Domain\Content\Services\SearchCategoryService;
  */
 class CategoryController extends Controller
 {
-    #[QueryParam(name: 'search', required: false, example: 'lor')]
-    #[QueryParam(name: 'take', type: 'number', description: 'Default: 15, ', required: false, example: 5)]
-    #[QueryParam(name: 'order_by', description: 'Default: latest by created_at, ', required: false)]
-    #[QueryParam(name: 'order_direction', description: 'Default: descending, ', required: false)]
+    #[QueryParam(name: 'query', required: false, example: 'lor')]
+    #[QueryParam(name: 'take', required: false, type: 'number', description: 'Default: 15, ', example: 5)]
+    #[QueryParam(name: 'order_by', required: false, description: 'Default: latest by created_at, ')]
+    #[QueryParam(name: 'order_direction', required: false, description: 'Default: descending, ')]
     public function index(Request $request)
     {
         $service = new SearchCategoryService($request->all());
