@@ -38,7 +38,7 @@ class SearchCategoryService
         $this->applySearch();
         $this->applyOrder();
 
-        return $this->query->paginate($this->take);
+        return $this->query->withCount('blogPosts')->paginate($this->take);
     }
 
     /**
@@ -49,7 +49,7 @@ class SearchCategoryService
         $this->take = isset($parameters['take']) ? (int) $parameters['take'] : 15;
         $this->orderBy = isset($parameters['order_by']) ? (string) $parameters['order_by'] : 'created_at';
         $this->orderDirection = isset($parameters['order_direction']) ? (string) $parameters['order_direction'] : 'DESC';
-        $this->search = isset($parameters['search']) ? (string) $parameters['search'] : '';
+        $this->search = isset($parameters['query']) ? (string) $parameters['query'] : '';
     }
 
     private function applyOrder(): void
@@ -57,7 +57,7 @@ class SearchCategoryService
         if (! $this->orderBy) {
             $this->query->orderBy($this->orderBy, $this->orderDirection);
         } else {
-            $this->query->latest();
+            $this->query->latest('ulid');
         }
     }
 
