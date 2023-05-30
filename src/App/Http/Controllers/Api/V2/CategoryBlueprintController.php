@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\V2;
 
-use Domain\Content\Models\Category;
-use Illuminate\Database\Connection;
 use App\Http\Controllers\Controller;
 use Doctrine\DBAL\Schema\Column;
 use Domain\Content\Data\CategoryData;
+use Domain\Content\Models\Category;
+use Illuminate\Database\Connection;
 use Illuminate\Database\ConnectionResolverInterface;
 
 /**

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\V2;
 
-use Illuminate\Http\Request;
-use Domain\Content\Models\Category;
 use App\Http\Controllers\Controller;
 use Domain\Content\Data\CategoryData;
+use Domain\Content\Models\Category;
+use Domain\Content\Services\SearchCategoryService;
+use Illuminate\Http\Request;
 use Knuckles\Scribe\Attributes\BodyParam;
 use Knuckles\Scribe\Attributes\QueryParam;
-use Domain\Content\Services\SearchCategoryService;
 
 /**
  * @group Category management V2
@@ -23,6 +23,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $service = new SearchCategoryService($request->all());
+
         return CategoryData::collection($service->search());
     }
 
@@ -31,6 +32,7 @@ class CategoryController extends Controller
     public function store(CategoryData $request)
     {
         $attributes = $request->toArray();
+
         return CategoryData::from(Category::query()->create($attributes));
     }
 
