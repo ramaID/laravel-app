@@ -23,6 +23,6 @@ class DatabaseSeeder extends \Illuminate\Database\Seeder
             CategorySeeder::class,
             // EventSeeder::class,
         ]);
-        BlogPost::factory()->count(500)->create();
+        BlogPost::factory()->count(10)->create();
     }
 }

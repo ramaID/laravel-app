@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::prefix('v1')->group(function () {
-    Route::apiResource('category', CategoryController::class);
-});
+// Route::prefix('v1')->group(function () {
+//     Route::apiResource('category', CategoryController::class);
+// });
 
 Route::prefix('v2')->group(function () {
-    Route::get('category/blueprint', CategoryBlueprintController::class);
+    // Route::get('category/blueprint', CategoryBlueprintController::class);
     Route::apiResource('category', V2CategoryController::class);
 });
