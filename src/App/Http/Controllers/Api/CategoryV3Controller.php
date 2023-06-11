@@ -19,24 +19,26 @@ class CategoryV3Controller extends Controller
     /**
      * Display a listing of the resource.
      */
-     #[QueryParam(name: 'query', required: false, example: 'lor')]
-     #[QueryParam(name: 'take', required: false, type: 'number', description: 'Default: 15, ', example: 5)]
-     #[QueryParam(name: 'order_by', required: false, description: 'Default: latest by created_at, ')]
-     #[QueryParam(name: 'order_direction', required: false, description: 'Default: descending, ')]
+    #[QueryParam(name: 'query', required: false, example: 'lor')]
+    #[QueryParam(name: 'take', required: false, type: 'number', description: 'Default: 15, ', example: 5)]
+    #[QueryParam(name: 'order_by', required: false, description: 'Default: latest by created_at, ')]
+    #[QueryParam(name: 'order_direction', required: false, description: 'Default: descending, ')]
     public function index(Request $request)
     {
         $service = new SearchCategoryService($request->all());
+
         return CategoryData::collection($service->search());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+     /**
+      * Store a newly created resource in storage.
+      */
      #[BodyParam(name: 'name')]
      #[BodyParam(name: 'description', required: false)]
     public function store(Request $request)
     {
         $attributes = $request->toArray();
+
         return CategoryData::from(Category::query()->create($attributes));
     }
 
@@ -56,6 +58,7 @@ class CategoryV3Controller extends Controller
     public function update(CategoryData $request, Category $category)
     {
         $category->update($request->toArray());
+
         return CategoryData::from($category->refresh());
     }
 
@@ -65,6 +68,7 @@ class CategoryV3Controller extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
         return response(null, 204);
     }
 }
